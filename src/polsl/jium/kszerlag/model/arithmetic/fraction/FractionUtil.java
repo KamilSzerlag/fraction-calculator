@@ -1,0 +1,104 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package polsl.jium.kszerlag.model.arithmetic.fraction;
+
+/**
+ * Provides most useful method
+ * for operating on fraction
+ * 
+ * @author szerlag
+ */
+public class FractionUtil {
+    
+    /**
+     * Validating passed arguments.
+     * 
+     * @param args
+     * @throws IllegalArgumentException 
+     */
+    static void validateElementsNotNull(Object... args) throws IllegalArgumentException {
+        for (Object obj : args) {
+            if (obj == null) {
+                throw new IllegalArgumentException("Object must not be null!");
+            }
+        }
+    }
+    
+    /**
+     * Finding a common denominator by multiplying the denominators with each other.
+     * 
+     * example:<br>
+     * <p> 
+     *     first fraction: 2/3<br> 
+     *     second fraction 1/2<br>
+     *     returns: 4/6<br>
+     * </p>
+     * * @param first
+     * @param second
+     * @return the first fraction reduced to the common with second fraction <br>   
+     */
+    static Fraction findCommonDenominator(Fraction first, Fraction second) {
+        if (first.getDenominator() == second.getDenominator()) {
+            return first;
+        }
+        int commonDenominator = second.getDenominator();
+        return new Fraction(first.getNumerator() * commonDenominator, first.getDenominator() * commonDenominator);
+    }
+    
+    /**
+     * Reverting fraction.
+     * 
+     * example:<br>
+     * <p>
+     *     fraction: 2/3<br>
+     *     returns: 3/2<br>
+     * </p>
+     * @param fraction
+     * @return reverted fraction
+     */
+    static Fraction revertFraction(Fraction fraction) {
+        return new Fraction(fraction.getDenominator(), fraction.getNumerator());
+    }
+    
+    /**
+     * 
+     * According to Wikipedia:
+     * <i>An irreducible fraction (or fraction in lowest terms or reduced fraction) 
+     * is a fraction in which the numerator and denominator are integers that 
+     * have no other common divisors than 1 (and -1, when negative numbers are considered).</i>
+     * <br>
+     * example:<br>
+     *      1st fraction: given 2/4 returning 1/2 which is irreducible
+     *      2nd fraction: given 5/6 returning 5/6 becouse is irreducible
+     * 
+     * @param fraction
+     * @return irreducible fraction
+     */
+    static Fraction getIrreducibleFraction(Fraction fraction) {
+        int greatestCommonDivisor = findGreatestCommonDivisor(fraction.getNumerator(), fraction.getDenominator());
+        return new Fraction(fraction.getNumerator() / greatestCommonDivisor, fraction.getDenominator() / greatestCommonDivisor);
+    }
+    
+    /**
+     * In mathematics, the greatest common divisor (gcd) of two or more integers, 
+     * which are not all zero, is the largest positive integer that divides each 
+     * of the integers. For example, the gcd of 8 and 12 is 4.
+     * 
+     * @param firstNumber
+     * @param secondNumber
+     * @return greatest common divisor;
+     */
+    static int findGreatestCommonDivisor(int firstNumber, int secondNumber) {
+        while(firstNumber != secondNumber){
+            if (firstNumber > secondNumber) {
+                firstNumber = firstNumber - secondNumber;
+            } else {
+                secondNumber = secondNumber - firstNumber;
+            }   
+        }
+        return firstNumber;
+    }
+}
