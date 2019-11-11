@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag;
 
 import polsl.jium.kszerlag.controller.FractionCalculatorController;
@@ -10,6 +5,13 @@ import polsl.jium.kszerlag.model.evaluator.SimpleFractionExpressionEvaluator;
 import polsl.jium.kszerlag.view.CalculatorView;
 
 /**
+ * FractionCalculatorApp helps performing operations on mathematics fraction.
+ * Input expression for example like "2/1+3/5" will be calculated 
+ * and displayed in calculator window text field.
+ * 
+ * Actually basic arithmetic operations are supported.
+ * 
+ * Application using MVC patter for communications between logic and visual layer. 
  *
  * @author szerlag
  * @version 1.0

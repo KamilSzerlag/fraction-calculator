@@ -16,7 +16,7 @@ public class FractionUtil {
     /**
      * Validating passed arguments.
      * 
-     * @param args
+     * @param args - all classes that inherit from Object class.
      * @throws IllegalArgumentException 
      */
     static void validateElementsNotNull(Object... args) throws IllegalArgumentException {
@@ -36,8 +36,8 @@ public class FractionUtil {
      *     second fraction 1/2<br>
      *     returns: 4/6<br>
      * </p>
-     * * @param first
-     * @param second
+     * @param first - first Fraction object
+     * @param second - second Fraction object
      * @return the first fraction reduced to the common with second fraction <br>   
      */
     static Fraction findCommonDenominator(Fraction first, Fraction second) {
@@ -56,7 +56,7 @@ public class FractionUtil {
      *     fraction: 2/3<br>
      *     returns: 3/2<br>
      * </p>
-     * @param fraction
+     * @param fraction - the Fraction object
      * @return reverted fraction
      */
     static Fraction revertFraction(Fraction fraction) {
@@ -87,8 +87,8 @@ public class FractionUtil {
      * which are not all zero, is the largest positive integer that divides each 
      * of the integers. For example, the gcd of 8 and 12 is 4.
      * 
-     * @param firstNumber
-     * @param secondNumber
+     * @param firstNumber - integer value of first number
+     * @param secondNumber - integer value of second number
      * @return greatest common divisor;
      */
     static int findGreatestCommonDivisor(int firstNumber, int secondNumber) {

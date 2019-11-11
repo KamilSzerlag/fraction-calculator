@@ -13,6 +13,9 @@ import polsl.jium.kszerlag.model.arithmetic.fraction.Fraction;
 import polsl.jium.kszerlag.model.arithmetic.fraction.FractionOperation;
 
 /**
+ * Class provides methods for evaluating basic mathematics expression which 
+ * contains arithmetic operations on fraction like "2/3 + 1/2" or "1/2 + 1/2" 
+ * 
  * @version 1.0
  * @author szerlag
  */
@@ -20,7 +23,14 @@ public class SimpleFractionExpressionEvaluator {
     
     private static final char[] ARITHMETIC_OPERATORS = {'+', '-', '*', ':', '^'}; 
     private static final char FRACTION_CHAR = '/';
-            
+    
+    /**
+     * Evaluating mathematics expression like "2/1 + 7/5".
+     * 
+     * @param expression - contains mathematic expression in <code>Sting</code>.
+     * @return result of expression as <code>Fraction</code> object.
+     * @throws EvaluationExpressionException when expression contains unsupported expression.
+     */
     public Fraction eval(String expression) throws EvaluationExpressionException {
         if (expression == null || expression.isEmpty()) {
             return null;
@@ -50,6 +60,17 @@ public class SimpleFractionExpressionEvaluator {
         return doFractionArithmeticOperation(fractionToCalculate, arithmeticOperator);
     }
     
+    /**
+     * Resolving which arithmetic operations sholud be done. Performing operation, if is supported
+     * otherwise throws EvaluationExpressionException.
+     * Supported arithmetic operators are collected in <code>ARITHMETIC_OPERATORS</code>
+     * const field.
+     * 
+     * @param fractions - <code>List</code> collected of Fraction objects.
+     * @param operator - char contains <b>basic arithmetic operator</b> 
+     * @return result of arithmetic operation on fraction.
+     * @throws EvaluationExpressionException when operator is unsupported.
+     */
     private Fraction doFractionArithmeticOperation(List<Fraction> fractions, char operator) throws EvaluationExpressionException {
         if (fractions == null || fractions.isEmpty()) {
             return null;
@@ -81,9 +102,15 @@ public class SimpleFractionExpressionEvaluator {
         return firstFraction;
     }
     
-    private boolean isAritchmeticOperators(char c) {
-        for (char operator : ARITHMETIC_OPERATORS) {
-            if(c == operator) {
+    /**
+     * Determines whether the operation is supported.
+     * 
+     * @param operator - char contains arithmetic operator.
+     * @return true if operator is supported, else false.
+     */
+    private boolean isAritchmeticOperators(char operator) {
+        for (char arithmeticOperator : ARITHMETIC_OPERATORS) {
+            if(operator == arithmeticOperator) {
                 return true;
             }
         }

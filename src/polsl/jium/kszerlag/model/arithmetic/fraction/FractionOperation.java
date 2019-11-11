@@ -8,9 +8,9 @@ package polsl.jium.kszerlag.model.arithmetic.fraction;
 import polsl.jium.kszerlag.model.arithmetic.ArithmeticOperation;
 
 /**
- * Provides implementation for 
- * basic arithmetic operation 
- * on Fraction
+ * Provides implementation for basic arithmetic operation on Fraction
+ * 
+ * @version 1.0
  * @author szerlag
  */
 public class FractionOperation implements ArithmeticOperation<Fraction> {

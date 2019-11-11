@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag.view;
 
 /**
- *
+ * Collected constants of buttons and operations panel in <code>CalculatorView</code>
+ * 
+ * @version 1.0
  * @author szerlag
  */
 public class ButtonsConst {
+
    static final String NUMBER_ZERO = "0";
    static final String NUMBER_ONE = "1";
    static final String NUMBER_TWO = "2";
@@ -28,4 +26,11 @@ public class ButtonsConst {
    static final String CALCULATE = "=";
    static final String FRACTION = "/";
    static final String CLEAR = "CLEAR";
+   
+   /**
+    * Prevents instanciation
+    */
+   private ButtonsConst() {
+       
+   }
 }

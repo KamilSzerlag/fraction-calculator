@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag.view;
 
 import java.awt.event.ActionEvent;
@@ -11,7 +6,10 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 
 /**
- *
+ * Custom button component. This class is intended for implementation of the
+ * <code>CalculatorView</code> logic requirements.
+ * 
+ * @version 1.0
  * @author szerlag
  */
 public class CustomButton extends JButton {
@@ -20,6 +18,13 @@ public class CustomButton extends JButton {
         super(text);
     }
     
+    /**
+     * Adding button text value to JTextField passed as argument object.
+     * 
+     * Overloading addActionListener method form JButton base class.
+     * 
+     * @param textField JTexField object where button text value should be append.
+     */
     public void addActionListener(JTextField textField) {
         super.addActionListener(new ActionListener() {
             @Override

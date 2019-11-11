@@ -6,10 +6,11 @@
 package polsl.jium.kszerlag.model.arithmetic.fraction;
 
 /**
+ * Exeption called when the passed string format is incorrect.
  *
  * @author szerlag
  */
-public class InvalidFractionFormatException extends RuntimeException {
+public class InvalidFractionFormatException extends IllegalArgumentException {
 
     public InvalidFractionFormatException() {
     }

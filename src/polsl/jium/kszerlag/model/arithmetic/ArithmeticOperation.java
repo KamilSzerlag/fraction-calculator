@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag.model.arithmetic;
 
 /**
@@ -13,7 +8,7 @@ package polsl.jium.kszerlag.model.arithmetic;
  *
  * @version 1.0
  * @author szerlag
- * @param <T>
+ * @param <T> T class must implements Calculable marker interface.
  */
 public interface ArithmeticOperation<T extends Calculable> {
     
@@ -23,7 +18,7 @@ public interface ArithmeticOperation<T extends Calculable> {
      * 
      * @param firstSummand
      * @param secondSummand
-     * @return 
+     * @return result of addition as T class.
      */
     T add(T firstSummand, T secondSummand);
     
@@ -31,9 +26,9 @@ public interface ArithmeticOperation<T extends Calculable> {
      * Subtraction(-)
      * minuend - subtrahend = difference
      * 
-     * @param minuend
+     * @param minuend 
      * @param subtrahend
-     * @return 
+     * @return result of subtraction as T class.
      */
     T subtruct(T minuend, T subtrahend);
     
@@ -43,7 +38,7 @@ public interface ArithmeticOperation<T extends Calculable> {
      * 
      * @param firstFactor 
      * @param secondFactor 
-     * @return 
+     * @return result of multiplication as T class.
      */
     T multiply(T firstFactor, T secondFactor);
     
@@ -53,7 +48,7 @@ public interface ArithmeticOperation<T extends Calculable> {
      * 
      * @param dividend
      * @param devisor
-     * @return 
+     * @return result of devision as T class.
      */
     T divide(T dividend, T devisor);
     
@@ -63,7 +58,7 @@ public interface ArithmeticOperation<T extends Calculable> {
      * 
      * @param base
      * @param exponent
-     * @return 
+     * @return result of exponentation as T class.
      */
     T power(T base, int exponent);
 }

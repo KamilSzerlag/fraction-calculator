@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag.view;
 
 import java.awt.Font;
@@ -20,9 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import polsl.jium.kszerlag.controller.FractionCalculatorController;
 import polsl.jium.kszerlag.model.arithmetic.fraction.Fraction;
+import polsl.jium.kszerlag.model.arithmetic.fraction.FractionArithmeticException;
+import polsl.jium.kszerlag.model.arithmetic.fraction.InvalidFractionFormatException;
+import polsl.jium.kszerlag.model.evaluator.EvaluationExpressionException;
 
 /**
- *
+ * Class representing main calculator view
+ * 
+ * @version 1.0
  * @author szerlag
  */
 public class CalculatorView extends JFrame {
@@ -45,7 +45,7 @@ public class CalculatorView extends JFrame {
     private static final int BUTTON_SIZE_WIDTH = 50;
     private static final int BUTTON_SIZE_HIGHT = 50;
     
-    private JTextField calculatorWindow;
+    private JTextField calculatorTextField;
 
     private FractionCalculatorController calculatorController;
     
@@ -53,6 +53,9 @@ public class CalculatorView extends JFrame {
         initComponents();
     }
     
+    /**
+     * Initializing CalculatorView components
+     */
     private void initComponents() {
         setTitle(FRAME_TITLE);
         setBounds(0, 0, FRAME_WIDTH, FRAME_HIGHT);
@@ -62,7 +65,7 @@ public class CalculatorView extends JFrame {
         
         setTitle("Fraction calculator by K_Szerlag");
         
-        Font font = null;
+        Font font;
         try {
             File file = new File(PATH_TO_FONT_FILE);
             font = Font.createFont(Font.TRUETYPE_FONT, file);
@@ -71,17 +74,17 @@ public class CalculatorView extends JFrame {
             font = new Font("Arial", Font.BOLD, 35);
         }
          
-        calculatorWindow = new JTextField();
-        calculatorWindow.setFont(font);
-        calculatorWindow.setHorizontalAlignment(JTextField.RIGHT);
-        calculatorWindow.setBounds(
+        calculatorTextField = new JTextField();
+        calculatorTextField.setFont(font);
+        calculatorTextField.setHorizontalAlignment(JTextField.RIGHT);
+        calculatorTextField.setBounds(
                 CALC_WINDOW_POS_X,
                 CALC_WINDOW_POS_Y,
                 CALC_WINDOW_WIDTH,
                 CALC_WINDOW_HIGHT);
-        calculatorWindow.setVisible(true);
-        calculatorWindow.setText("HELLO!");
-        add(calculatorWindow);
+        calculatorTextField.setVisible(true);
+        calculatorTextField.setText("HELLO!");
+        add(calculatorTextField);
         
         GridLayout layout = new GridLayout(3, 3);
         layout.setVgap(20);
@@ -97,43 +100,43 @@ public class CalculatorView extends JFrame {
         buttonsPanel.setVisible(true);
         
         CustomButton buttonOne = new CustomButton(ButtonsConst.NUMBER_ONE);
-        buttonOne.addActionListener(calculatorWindow);
+        buttonOne.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonOne);
         
         CustomButton buttonTwo = new CustomButton(ButtonsConst.NUMBER_TWO);
-        buttonTwo.addActionListener(calculatorWindow);
+        buttonTwo.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonTwo);
         
         CustomButton buttonThree = new CustomButton(ButtonsConst.NUMBER_THREE);
-        buttonThree.addActionListener(calculatorWindow);
+        buttonThree.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonThree);
         
         CustomButton buttonFour = new CustomButton(ButtonsConst.NUMBER_FOUR);
-        buttonFour.addActionListener(calculatorWindow);
+        buttonFour.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonFour);
         
         CustomButton buttonFive = new CustomButton(ButtonsConst.NUMBER_FIVE);
-        buttonFive.addActionListener(calculatorWindow);
+        buttonFive.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonFive);
         
         CustomButton buttonSix = new CustomButton(ButtonsConst.NUMBER_SIX);
-        buttonSix.addActionListener(calculatorWindow);
+        buttonSix.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonSix);
         
         CustomButton buttonSeven = new CustomButton(ButtonsConst.NUMBER_SEVEN);
-        buttonSeven.addActionListener(calculatorWindow);
+        buttonSeven.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonSeven);
         
         CustomButton buttonEight = new CustomButton(ButtonsConst.NUMBER_EIGHT);
-        buttonEight.addActionListener(calculatorWindow);
+        buttonEight.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonEight);
         
         CustomButton buttonNine = new CustomButton(ButtonsConst.NUMBER_NINE);
-        buttonNine.addActionListener(calculatorWindow);
+        buttonNine.addActionListener(calculatorTextField);
         buttonsPanel.add(buttonNine);
         
         CustomButton buttonZero = new CustomButton(ButtonsConst.NUMBER_ZERO);
-        buttonZero.addActionListener(calculatorWindow);
+        buttonZero.addActionListener(calculatorTextField);
         buttonZero.setBounds(
                 CALC_WINDOW_POS_X - 20,
                 CALC_WINDOW_POS_Y + CALC_WINDOW_HIGHT + BUTTON_POS_Y_GAP + PANEL_BUTTONS_HIGHT + 20,
@@ -142,8 +145,6 @@ public class CalculatorView extends JFrame {
                 );
         buttonZero.setVisible(true);
         add(buttonZero);
-        repaint();
-        revalidate();
         
         JPanel operationsPanel = new JPanel(new GridLayout(2,2));
         add(operationsPanel);
@@ -156,23 +157,23 @@ public class CalculatorView extends JFrame {
         operationsPanel.setVisible(true);
         
         CustomButton plusButton = new CustomButton(ButtonsConst.PLUS);
-        plusButton.addActionListener(calculatorWindow);
+        plusButton.addActionListener(calculatorTextField);
         operationsPanel.add(plusButton);
         
         CustomButton minusButton = new CustomButton(ButtonsConst.MINUS);
-        minusButton.addActionListener(calculatorWindow);
+        minusButton.addActionListener(calculatorTextField);
         operationsPanel.add(minusButton);
         
         CustomButton multButton = new CustomButton(ButtonsConst.MULT);
-        multButton.addActionListener(calculatorWindow);
+        multButton.addActionListener(calculatorTextField);
         operationsPanel.add(multButton);
         
         CustomButton divButton = new CustomButton(ButtonsConst.DIV);
-        divButton.addActionListener(calculatorWindow);
+        divButton.addActionListener(calculatorTextField);
         operationsPanel.add(divButton);
         
         CustomButton fracButton = new CustomButton(ButtonsConst.FRACTION);
-        fracButton.addActionListener(calculatorWindow);
+        fracButton.addActionListener(calculatorTextField);
         operationsPanel.add(fracButton);
         
         JButton calculateButton = new JButton(ButtonsConst.CALCULATE);
@@ -181,10 +182,19 @@ public class CalculatorView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    calculatorController.evalExpression(calculatorWindow.getText());
-                } catch(Exception ex) {
+                    calculatorController.calculate(calculatorTextField.getText());
+                } catch(InvalidFractionFormatException ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex, "WARNING", 1);
+                    calculatorTextField.setText("INVALID FRACTION FORMAT!");
+                } catch(FractionArithmeticException ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex, "WARNING", 1);
+                    calculatorTextField.setText("INVALID DENOMINATOR!");
+                } catch(EvaluationExpressionException ex) {
                     JOptionPane.showMessageDialog(rootPane, ex, "ERROR", 0);
-                    calculatorWindow.setText("ERROR");
+                    calculatorTextField.setText("EXPRESSION CAN'T BE CALCULATED");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(rootPane, ex, "ERROR", 0);
+                    calculatorTextField.setText("ERROR!");
                 }
             }
         });
@@ -194,7 +204,7 @@ public class CalculatorView extends JFrame {
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                calculatorWindow.setText("");
+                calculatorTextField.setText("");
             }
         });
         clearButton.setBounds(
@@ -208,11 +218,21 @@ public class CalculatorView extends JFrame {
         revalidate();
     }
     
+    /**
+     * Setting initalizing calculatorController field.
+     * 
+     * @param controller FractionCalculatorController class object. 
+     */
     public void setController(FractionCalculatorController controller) {
         this.calculatorController = controller;
     }
     
+    /**
+     * Displaying calculation result by setting calculator text field value.
+     * 
+     * @param fraction <code>Fraction</code> class object.
+     */
     public void displayCalculationResult(Fraction fraction) {
-        calculatorWindow.setText(fraction.getNumerator() + "/" + fraction.getDenominator());
+        calculatorTextField.setText(fraction.getNumerator() + "/" + fraction.getDenominator());
     }
 }
