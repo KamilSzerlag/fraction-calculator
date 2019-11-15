@@ -1,6 +1,8 @@
 package polsl.jium.kszerlag;
 
 import polsl.jium.kszerlag.controller.FractionCalculatorController;
+import polsl.jium.kszerlag.model.evaluator.EvaluationExpressionStrategy;
+import polsl.jium.kszerlag.model.evaluator.PolishNotationExpressionEvaluator;
 import polsl.jium.kszerlag.model.evaluator.SimpleFractionExpressionEvaluator;
 import polsl.jium.kszerlag.view.CalculatorView;
 
@@ -26,6 +28,9 @@ public class FractionCalculatorApp {
         CalculatorView calculatorView = new CalculatorView();
         FractionCalculatorController controller = new FractionCalculatorController(evaluator, calculatorView);
         calculatorView.setController(controller);
+        
+        PolishNotationExpressionEvaluator evalStrategy = new PolishNotationExpressionEvaluator();
+        System.out.println(evalStrategy.toPostifix("3+4*2:(1-5)"));
     }
     
 }

@@ -16,10 +16,10 @@ import polsl.jium.kszerlag.model.arithmetic.fraction.FractionOperation;
  * Class provides methods for evaluating basic mathematics expression which 
  * contains arithmetic operations on fraction like "2/3 + 1/2" or "1/2 + 1/2" 
  * 
- * @version 1.0
+ * @version 2.0
  * @author szerlag
  */
-public class SimpleFractionExpressionEvaluator {
+public class SimpleFractionExpressionEvaluator implements EvaluationExpressionStrategy<Fraction>{
     
     private static final char[] ARITHMETIC_OPERATORS = {'+', '-', '*', ':', '^'}; 
     private static final char FRACTION_CHAR = '/';
@@ -40,17 +40,18 @@ public class SimpleFractionExpressionEvaluator {
         List<Fraction> fractionToCalculate = new ArrayList<>();
         char arithmeticOperator = 'x';
         for (int i = 0; i < expression.length(); i++) {
-            if ((expression.charAt(i) >= '0') && (expression.charAt(i) <= '9')) {
-                sb.append(expression.charAt(i));
+            char sym = expression.charAt(i);
+            if (EvaluationExpressionUtil.isNumber(sym)) {
+                sb.append(sym);
             }
-            if (expression.charAt(i) == FRACTION_CHAR) {
-                sb.append(expression.charAt(i));
+            if (sym == FRACTION_CHAR) {
+                sb.append(sym);
             }
-            if (isAritchmeticOperators(expression.charAt(i))) {
+            if (EvaluationExpressionUtil.isAritchmeticOperator(sym)) {
                 Fraction fraction = Fraction.valueOf(sb.toString());
                 fractionToCalculate.add(fraction);
                 sb = new StringBuilder();
-                arithmeticOperator = expression.charAt(i);
+                arithmeticOperator = sym;
             }
             if (i + 1 == expression.length()) {
                 Fraction fraction = Fraction.valueOf(sb.toString());
@@ -75,7 +76,7 @@ public class SimpleFractionExpressionEvaluator {
         if (fractions == null || fractions.isEmpty()) {
             return null;
         }
-        if (!isAritchmeticOperators(operator)) {
+        if (!EvaluationExpressionUtil.isAritchmeticOperator(operator)) {
             throw new EvaluationExpressionException("No such arithmetic operation!");
         }
         
@@ -100,21 +101,6 @@ public class SimpleFractionExpressionEvaluator {
             return arithmeticOperation.divide(firstFraction, secondFraction);
         }
         return firstFraction;
-    }
-    
-    /**
-     * Determines whether the operation is supported.
-     * 
-     * @param operator - char contains arithmetic operator.
-     * @return true if operator is supported, else false.
-     */
-    private boolean isAritchmeticOperators(char operator) {
-        for (char arithmeticOperator : ARITHMETIC_OPERATORS) {
-            if(operator == arithmeticOperator) {
-                return true;
-            }
-        }
-        return false;
     }
     
 }
