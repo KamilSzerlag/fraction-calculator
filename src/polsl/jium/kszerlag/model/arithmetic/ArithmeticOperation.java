@@ -7,7 +7,7 @@ package polsl.jium.kszerlag.model.arithmetic;
  * operations.
  *
  * @version 1.0
- * @author szerlag
+ * @author Kamil Szerląg
  * @param <T> T class must implements Calculable marker interface.
  */
 public interface ArithmeticOperation<T extends Calculable> {

@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag.model.arithmetic.fraction;
 
 /**
  * Provides most useful method
  * for operating on fraction
  * 
- * @author szerlag
+ * @version 2.0
+ * @author Kamil Szerląg
  */
 public class FractionUtil {
     
@@ -19,7 +15,7 @@ public class FractionUtil {
      * @param args - all classes that inherit from Object class.
      * @throws IllegalArgumentException 
      */
-    static void validateElementsNotNull(Object... args) throws IllegalArgumentException {
+    void validateElementsNotNull(Object... args) throws IllegalArgumentException {
         for (Object obj : args) {
             if (obj == null) {
                 throw new IllegalArgumentException("Object must not be null!");
@@ -40,7 +36,7 @@ public class FractionUtil {
      * @param second - second Fraction object
      * @return the first fraction reduced to the common with second fraction <br>   
      */
-    static Fraction findCommonDenominator(Fraction first, Fraction second) {
+    Fraction findCommonDenominator(Fraction first, Fraction second) {
         if (first.getDenominator() == second.getDenominator()) {
             return first;
         }
@@ -59,7 +55,7 @@ public class FractionUtil {
      * @param fraction - the Fraction object
      * @return reverted fraction
      */
-    static Fraction revertFraction(Fraction fraction) {
+    Fraction revertFraction(Fraction fraction) {
         return new Fraction(fraction.getDenominator(), fraction.getNumerator());
     }
     
@@ -77,7 +73,7 @@ public class FractionUtil {
      * @param fraction
      * @return irreducible fraction
      */
-    static Fraction getIrreducibleFraction(Fraction fraction) {
+    Fraction irreducibleFraction(Fraction fraction) {
         int greatestCommonDivisor = findGreatestCommonDivisor(fraction.getNumerator(), fraction.getDenominator());
         return new Fraction(fraction.getNumerator() / greatestCommonDivisor, fraction.getDenominator() / greatestCommonDivisor);
     }
@@ -91,7 +87,7 @@ public class FractionUtil {
      * @param secondNumber - integer value of second number
      * @return greatest common divisor;
      */
-    static int findGreatestCommonDivisor(int firstNumber, int secondNumber) {
+    int findGreatestCommonDivisor(int firstNumber, int secondNumber) {
         while(firstNumber != secondNumber){
             if (firstNumber > secondNumber) {
                 firstNumber = firstNumber - secondNumber;

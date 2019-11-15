@@ -2,7 +2,8 @@ package polsl.jium.kszerlag;
 
 import polsl.jium.kszerlag.controller.FractionCalculatorController;
 import polsl.jium.kszerlag.model.evaluator.SimpleFractionExpressionEvaluator;
-import polsl.jium.kszerlag.view.CalculatorView;
+import polsl.jium.kszerlag.view.console.ConsolePrinter;
+import polsl.jium.kszerlag.view.window.CalculatorView;
 
 /**
  * FractionCalculatorApp helps performing operations on mathematics fraction.
@@ -13,19 +14,28 @@ import polsl.jium.kszerlag.view.CalculatorView;
  * 
  * Application using MVC patter for communications between logic and visual layer. 
  *
- * @author szerlag
+ * @author Kamil Szeląg
  * @version 1.0
  */
 public class FractionCalculatorApp {
 
     /**
-     * @param args the command line arguments
+     * @param args expression to evaluation contaning operation on fractions.
+     * For example:
+     * "1/2+3/4"
+     * <b>Note:</b>Running interactive mode if no arguments are passed. 
      */
     public static void main(String[] args) {
         SimpleFractionExpressionEvaluator evaluator = new SimpleFractionExpressionEvaluator();
-        CalculatorView calculatorView = new CalculatorView();
-        FractionCalculatorController controller = new FractionCalculatorController(evaluator, calculatorView);
-        calculatorView.setController(controller);
+        if (args.length == 1) {
+            ConsolePrinter consolePrinter = new ConsolePrinter();
+            FractionCalculatorController controller = new FractionCalculatorController(evaluator, consolePrinter);
+            controller.calculate(args[0]);
+        } else {
+            CalculatorView calculatorView = new CalculatorView();
+            FractionCalculatorController controller = new FractionCalculatorController(evaluator, calculatorView);
+            calculatorView.setController(controller);
+        }
     }
     
 }

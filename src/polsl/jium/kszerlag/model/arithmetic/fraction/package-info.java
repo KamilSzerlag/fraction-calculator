@@ -3,7 +3,7 @@
  * on fraction.
  * 
  * Fraction is represented by <code>Fraction</code> class.
- * @version 1.0
- * @author kszerlag
+ * 
+ * @author Kamil Szerląg
  */
 package polsl.jium.kszerlag.model.arithmetic.fraction;

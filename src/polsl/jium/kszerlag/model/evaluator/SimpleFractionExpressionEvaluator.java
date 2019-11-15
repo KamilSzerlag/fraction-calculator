@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package polsl.jium.kszerlag.model.evaluator;
 
 import java.util.ArrayList;
@@ -16,13 +11,22 @@ import polsl.jium.kszerlag.model.arithmetic.fraction.FractionOperation;
  * Class provides methods for evaluating basic mathematics expression which 
  * contains arithmetic operations on fraction like "2/3 + 1/2" or "1/2 + 1/2" 
  * 
- * @version 1.0
- * @author szerlag
+ * @version 2.0
+ * @author Kamil Szerląg
  */
 public class SimpleFractionExpressionEvaluator {
     
-    private static final char[] ARITHMETIC_OPERATORS = {'+', '-', '*', ':', '^'}; 
-    private static final char FRACTION_CHAR = '/';
+    /**
+     * Constant Array of Arithmetic operators.
+     */
+    private static final char[] ARITHMETIC_OPERATORS = {'+', '-', '*', ':', '^'};
+    
+    /**
+     * Constant represents fraction line in expression.
+     * The part before slash is a number above the line known as numerator.
+     * The part after slash is a number below the line known as denominator.
+     */
+    private static final char FRACTION_SYMBOL = '/';
     
     /**
      * Evaluating mathematics expression like "2/1 + 7/5".
@@ -37,27 +41,28 @@ public class SimpleFractionExpressionEvaluator {
         }
         expression = expression.trim();
         StringBuilder sb = new StringBuilder();
-        List<Fraction> fractionToCalculate = new ArrayList<>();
-        char arithmeticOperator = 'x';
+        List<Fraction> fractions = new ArrayList<>();
+        char arithmeticOperator = 0;
         for (int i = 0; i < expression.length(); i++) {
-            if ((expression.charAt(i) >= '0') && (expression.charAt(i) <= '9')) {
-                sb.append(expression.charAt(i));
+            char symbol = expression.charAt(i);
+            if (isNumber(symbol)) {
+                sb.append(symbol);
             }
-            if (expression.charAt(i) == FRACTION_CHAR) {
-                sb.append(expression.charAt(i));
+            if (symbol == FRACTION_SYMBOL) {
+                sb.append(symbol);
             }
-            if (isAritchmeticOperators(expression.charAt(i))) {
+            if (isAritchmeticOperators(symbol)) {
                 Fraction fraction = Fraction.valueOf(sb.toString());
-                fractionToCalculate.add(fraction);
+                fractions.add(fraction);
                 sb = new StringBuilder();
-                arithmeticOperator = expression.charAt(i);
+                arithmeticOperator = symbol;
             }
             if (i + 1 == expression.length()) {
                 Fraction fraction = Fraction.valueOf(sb.toString());
-                fractionToCalculate.add(fraction);
+                fractions.add(fraction);
             }
         }
-        return doFractionArithmeticOperation(fractionToCalculate, arithmeticOperator);
+        return doFractionArithmeticOperation(fractions, arithmeticOperator);
     }
     
     /**
@@ -103,18 +108,27 @@ public class SimpleFractionExpressionEvaluator {
     }
     
     /**
-     * Determines whether the operation is supported.
+     * Determines whether the symbol is supported arithmetic operator.
      * 
-     * @param operator - char contains arithmetic operator.
+     * @param symbol - char contains arithmetic operator.
      * @return true if operator is supported, else false.
      */
-    private boolean isAritchmeticOperators(char operator) {
+    private boolean isAritchmeticOperators(char symbol) {
         for (char arithmeticOperator : ARITHMETIC_OPERATORS) {
-            if(operator == arithmeticOperator) {
+            if(symbol == arithmeticOperator) {
                 return true;
             }
         }
         return false;
     }
     
+    /**
+     * Determines wheather the symbol is a number.
+     * 
+     * @param symbol char symbol.
+     * @return true if symbol is a number.
+     */
+    private boolean isNumber(char symbol) {
+        return (symbol >= '0') && (symbol <= '9');
+    }
 }

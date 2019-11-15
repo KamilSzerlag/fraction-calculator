@@ -1,21 +1,31 @@
 package polsl.jium.kszerlag.controller;
 
+import polsl.jium.kszerlag.model.arithmetic.fraction.InvalidFractionFormatException;
 import polsl.jium.kszerlag.model.evaluator.EvaluationExpressionException;
 import polsl.jium.kszerlag.model.evaluator.SimpleFractionExpressionEvaluator;
-import polsl.jium.kszerlag.view.CalculatorView;
+import polsl.jium.kszerlag.view.Displayable;
 
 /**
  * Controller class that performs the role of an intermediate layer between 
  * the view an the model.
  * 
- * @version 1.0
- * @author szerlag
+ * @version 2.0
+ * @author Kamil Szerląg
  */
 public class FractionCalculatorController {
-    private SimpleFractionExpressionEvaluator evaluator;
-    private CalculatorView calculatorView; 
+    
+    private final SimpleFractionExpressionEvaluator evaluator;
+    private final Displayable calculatorView; 
 
-    public FractionCalculatorController(SimpleFractionExpressionEvaluator evaluator, CalculatorView calculatorView) {
+    /**
+     * Constructing controller with defined model logic provided by 
+     * <code>SimpleFractionExpressionEvaluator</code> and view represented by
+     * class implementing <code>Displayable</code> interface.
+     * 
+     * @param evaluator model containing logic to evaluating mathematics expression.
+     * @param calculatorView view implementing <code>Displayable</code> interface.
+     */
+    public FractionCalculatorController(SimpleFractionExpressionEvaluator evaluator, Displayable calculatorView) {
         this.evaluator = evaluator;
         this.calculatorView = calculatorView;
     }
@@ -25,10 +35,15 @@ public class FractionCalculatorController {
      * calculator view text field.
      * 
      * @param expression - <code>String</code> contains mathematics expression.
-     * @throws EvaluationExpressionException - when expression can't be evaluated.
      */
-    public void calculate(String expression) throws EvaluationExpressionException {
-        calculatorView.displayCalculationResult(evaluator.eval(expression));
+    public void calculate(String expression) {
+        try {
+            calculatorView.displayCalculationResult(evaluator.eval(expression));
+        } catch (InvalidFractionFormatException e) {
+            calculatorView.displayWarningMsg(e);
+        } catch (EvaluationExpressionException e) {
+            calculatorView.displayErrorMsg(e); 
+        }
     }
     
     

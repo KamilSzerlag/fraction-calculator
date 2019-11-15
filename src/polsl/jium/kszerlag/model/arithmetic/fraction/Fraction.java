@@ -7,13 +7,26 @@ import polsl.jium.kszerlag.model.arithmetic.Calculable;
  * In maths fraction represents a part of a whole or, more generally, any 
  * number of equal parts
  * 
- * @version 1.0
- * @author szerlag
+ * @version 2.0
+ * @author Kamil Szerląg
  */
 public class Fraction implements Calculable, Comparable<Fraction>{
     
+    /**
+     * Numerator is top part of fraction.
+     */
     private int numerator;
+    
+    /**
+     * Denominator is button part of fraction.
+     */
     private int denominator;
+    
+    /**
+     * Fraction could also contains optional integer part.
+     * For example, fraction 5/2 could be converted to 2 and 1/2, 
+     * where 2 is integer part of fraction.
+     */
     private int fractionInteger;
     
     /**
@@ -31,6 +44,13 @@ public class Fraction implements Calculable, Comparable<Fraction>{
         this.denominator = denominator;
     }
     
+    /**
+     * Constructing Fraction object with optional fraction integer part.
+     * 
+     * @param numerator integer value.
+     * @param denominator integer value, must be different then zero.
+     * @param fractionInteger integer value.
+     */
     public Fraction(int numerator, int denominator, int fractionInteger) {
         this(numerator, denominator);
         this.fractionInteger = fractionInteger;
@@ -107,8 +127,9 @@ public class Fraction implements Calculable, Comparable<Fraction>{
             return false;
         }
         final Fraction other = (Fraction) obj;
-        Fraction irreducibleOther = FractionUtil.getIrreducibleFraction(other);
-        Fraction irreducibleThis = FractionUtil.getIrreducibleFraction(this);
+        FractionUtil fractionUtil = new FractionUtil();
+        Fraction irreducibleOther = fractionUtil.irreducibleFraction(other);
+        Fraction irreducibleThis = fractionUtil.irreducibleFraction(this);
         if (irreducibleThis.getNumerator() != irreducibleOther.getNumerator()) {
             return false;
         }
@@ -123,7 +144,8 @@ public class Fraction implements Calculable, Comparable<Fraction>{
         if (other == null) {
             throw new NullPointerException("Compared object is null!");
         }
-        final Fraction otherCommonDenominator = FractionUtil.findCommonDenominator(other, this);
+        FractionUtil fractionUtil = new FractionUtil();
+        final Fraction otherCommonDenominator = fractionUtil.findCommonDenominator(other, this);
         if (this.getNumerator() < otherCommonDenominator.getNumerator()) {
             return -1;
         }

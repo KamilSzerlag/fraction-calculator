@@ -1,4 +1,4 @@
-package polsl.jium.kszerlag.view;
+package polsl.jium.kszerlag.view.window;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,7 +10,7 @@ import javax.swing.JTextField;
  * <code>CalculatorView</code> logic requirements.
  * 
  * @version 1.0
- * @author szerlag
+ * @author Kamil Szerląg
  */
 public class CustomButton extends JButton {
 
@@ -25,7 +25,7 @@ public class CustomButton extends JButton {
      * 
      * @param textField JTexField object where button text value should be append.
      */
-    public void addActionListener(JTextField textField) {
+    void addActionListener(JTextField textField) {
         super.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

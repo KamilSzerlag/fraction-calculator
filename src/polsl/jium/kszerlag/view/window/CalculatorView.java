@@ -1,4 +1,4 @@
-package polsl.jium.kszerlag.view;
+package polsl.jium.kszerlag.view.window;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -15,17 +15,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import polsl.jium.kszerlag.controller.FractionCalculatorController;
 import polsl.jium.kszerlag.model.arithmetic.fraction.Fraction;
-import polsl.jium.kszerlag.model.arithmetic.fraction.FractionArithmeticException;
-import polsl.jium.kszerlag.model.arithmetic.fraction.InvalidFractionFormatException;
-import polsl.jium.kszerlag.model.evaluator.EvaluationExpressionException;
+import polsl.jium.kszerlag.view.Displayable;
 
 /**
  * Class representing main calculator view
  * 
- * @version 1.0
- * @author szerlag
+ * @version 2.0
+ * @author Kamil Szerląg
  */
-public class CalculatorView extends JFrame {
+public class CalculatorView extends JFrame implements Displayable {
     
     private static final String PATH_TO_FONT_FILE = "src/resources/digital-7.ttf";
     
@@ -49,6 +47,11 @@ public class CalculatorView extends JFrame {
 
     private FractionCalculatorController calculatorController;
     
+    /**
+     * Constructing calculator view presented in the application window.
+     * 
+     * @throws HeadlessException 
+     */
     public CalculatorView() throws HeadlessException {
         initComponents();
     }
@@ -181,21 +184,7 @@ public class CalculatorView extends JFrame {
         calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    calculatorController.calculate(calculatorTextField.getText());
-                } catch(InvalidFractionFormatException ex) {
-                    JOptionPane.showMessageDialog(rootPane, ex, "WARNING", 1);
-                    calculatorTextField.setText("INVALID FRACTION FORMAT!");
-                } catch(FractionArithmeticException ex) {
-                    JOptionPane.showMessageDialog(rootPane, ex, "WARNING", 1);
-                    calculatorTextField.setText("INVALID DENOMINATOR!");
-                } catch(EvaluationExpressionException ex) {
-                    JOptionPane.showMessageDialog(rootPane, ex, "ERROR", 0);
-                    calculatorTextField.setText("EXPRESSION CAN'T BE CALCULATED");
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(rootPane, ex, "ERROR", 0);
-                    calculatorTextField.setText("ERROR!");
-                }
+                calculatorController.calculate(calculatorTextField.getText());
             }
         });
         operationsPanel.add(calculateButton);
@@ -227,12 +216,22 @@ public class CalculatorView extends JFrame {
         this.calculatorController = controller;
     }
     
-    /**
-     * Displaying calculation result by setting calculator text field value.
-     * 
-     * @param fraction <code>Fraction</code> class object.
-     */
+    @Override
     public void displayCalculationResult(Fraction fraction) {
         calculatorTextField.setText(fraction.getNumerator() + "/" + fraction.getDenominator());
     }
+
+    @Override
+    public void displayWarningMsg(RuntimeException e) {
+        JOptionPane.showMessageDialog(rootPane, e, "WARNING", 1);
+        calculatorTextField.setText(e.getMessage());
+    }
+
+    @Override
+    public void displayErrorMsg(Exception e) {
+        JOptionPane.showMessageDialog(rootPane, e, "ERROR", 0);
+        calculatorTextField.setText(e.getMessage());
+    }
+    
+    
 }

@@ -5,7 +5,7 @@ package polsl.jium.kszerlag.model.arithmetic;
  * basic arithmetic operations defined in <code>ArithmeticOperation</code> interface	
  * 
  * @version 1.0
- * @author szerlag
+ * @author Kamil Szerląg
  */
 public interface Calculable {
     

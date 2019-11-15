@@ -1,10 +1,10 @@
-package polsl.jium.kszerlag.view;
+package polsl.jium.kszerlag.view.window;
 
 /**
  * Collected constants of buttons and operations panel in <code>CalculatorView</code>
  * 
  * @version 1.0
- * @author szerlag
+ * @author Kamil Szerląg
  */
 public class ButtonsConst {
 

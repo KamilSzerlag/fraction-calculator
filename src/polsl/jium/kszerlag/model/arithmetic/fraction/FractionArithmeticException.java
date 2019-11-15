@@ -4,7 +4,8 @@ package polsl.jium.kszerlag.model.arithmetic.fraction;
  * Thrown when an exceptional condition has occurred during creating Fraction object. For
  * example, passing in denominator integer zero value.
  * 
- * @author szerlag
+ * @version 2.0
+ * @author Kamil Szerląg
  */
 public class FractionArithmeticException extends ArithmeticException {
 
