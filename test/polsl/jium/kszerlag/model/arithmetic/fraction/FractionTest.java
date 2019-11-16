@@ -64,40 +64,36 @@ public class FractionTest {
      * Test of hashCode method, of class Fraction.
      */
     @Test
-    public void testHashCode() {
-        System.out.println("hashCode");
-        Fraction instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
+    public void should_Compare_Symmetric_HashCode_Equality() {
+        Fraction first = new Fraction(1, 14);
+        Fraction second = new Fraction(1, 14);
+        assertTrue(first.equals(second) && second.equals(first));
+        assertTrue(first.hashCode() == second.hashCode());
     }
 
     /**
      * Test of equals method, of class Fraction.
      */
     @Test
-    public void testEquals() {
-        System.out.println("equals");
-        Object obj = null;
-        Fraction instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals(obj);
-        assertEquals(expResult, result);
+    public void should_Return_True_For_Symmetrical_Equality() {
+        Fraction first = new Fraction(2, 4);
+        Fraction second = new Fraction(1, 2);
+        assertTrue(first.equals(second) && second.equals(first));
+    }
+    
+    @Test
+    public void should_Return_False_For_Symmetrical_Equality() {
+        Fraction first = new Fraction(2, 8);
+        Fraction second = new Fraction(1, 2);
+        assertFalse(first.equals(second) && second.equals(first));
     }
 
     /**
      * Test of compareTo method, of class Fraction.
      */
     @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        Fraction other = null;
-        Fraction instance = null;
-        int expResult = 0;
-        int result = instance.compareTo(other);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void should_Return_() {
+        
     }
 
     /**
