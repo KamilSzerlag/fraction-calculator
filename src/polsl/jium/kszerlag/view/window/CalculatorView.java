@@ -5,7 +5,6 @@ import java.awt.FontFormatException;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JButton;
@@ -181,20 +180,14 @@ public class CalculatorView extends JFrame implements Displayable {
         
         JButton calculateButton = new JButton(ButtonsConst.CALCULATE);
         
-        calculateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculatorController.calculate(calculatorTextField.getText());
-            }
+        calculateButton.addActionListener((ActionEvent e) -> {
+            calculatorController.calculate(calculatorTextField.getText());
         });
         operationsPanel.add(calculateButton);
         
         JButton clearButton = new JButton(ButtonsConst.CLEAR);
-        clearButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculatorTextField.setText("");
-            }
+        clearButton.addActionListener((ActionEvent e) -> {
+            calculatorTextField.setText("");
         });
         clearButton.setBounds(
                 CALC_WINDOW_POS_X - 30 + PANEL_BUTTONS_WIDTH + BUTTON_POS_X_GAP,

@@ -1,5 +1,6 @@
 package polsl.jium.kszerlag.model.arithmetic.fraction;
 
+import java.util.Objects;
 import polsl.jium.kszerlag.model.arithmetic.Calculable;
 
 /**
@@ -71,8 +72,8 @@ public class Fraction implements Calculable, Comparable<Fraction>{
      * @throws NullPointerException
      * @return Fraction object from <code>String</code> passed value.
      */
-    public static Fraction valueOf(String fraction) throws InvalidFractionFormatException, NullPointerException {
-        if (fraction == null) {
+    public static Fraction of(String fraction) throws InvalidFractionFormatException, NullPointerException {
+        if (fraction == null || fraction.isEmpty()) {
             throw new NullPointerException("String argument is null!");
         }
         fraction = fraction.trim();
@@ -111,8 +112,7 @@ public class Fraction implements Calculable, Comparable<Fraction>{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash;
+        return Objects.hash(this.numerator, this.denominator);
     }
 
     @Override

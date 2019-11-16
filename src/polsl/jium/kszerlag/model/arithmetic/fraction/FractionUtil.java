@@ -7,7 +7,7 @@ package polsl.jium.kszerlag.model.arithmetic.fraction;
  * @version 2.0
  * @author Kamil Szerląg
  */
-public class FractionUtil {
+class FractionUtil {
     
     /**
      * Validating passed arguments.
@@ -15,10 +15,10 @@ public class FractionUtil {
      * @param args - all classes that inherit from Object class.
      * @throws IllegalArgumentException 
      */
-    void validateElementsNotNull(Object... args) throws IllegalArgumentException {
+    void validateElementsNotNull(Object... args) throws IllegalArgumentValueException {
         for (Object obj : args) {
             if (obj == null) {
-                throw new IllegalArgumentException("Object must not be null!");
+                throw new IllegalArgumentValueException("Object must not be null!");
             }
         }
     }

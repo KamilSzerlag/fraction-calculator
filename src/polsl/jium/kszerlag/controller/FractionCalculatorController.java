@@ -1,5 +1,6 @@
 package polsl.jium.kszerlag.controller;
 
+import polsl.jium.kszerlag.model.arithmetic.fraction.FractionArithmeticException;
 import polsl.jium.kszerlag.model.arithmetic.fraction.InvalidFractionFormatException;
 import polsl.jium.kszerlag.model.evaluator.EvaluationExpressionException;
 import polsl.jium.kszerlag.model.evaluator.SimpleFractionExpressionEvaluator;
@@ -39,10 +40,12 @@ public class FractionCalculatorController {
     public void calculate(String expression) {
         try {
             calculatorView.displayCalculationResult(evaluator.eval(expression));
-        } catch (InvalidFractionFormatException e) {
+        } catch (FractionArithmeticException | InvalidFractionFormatException e) {
             calculatorView.displayWarningMsg(e);
         } catch (EvaluationExpressionException e) {
             calculatorView.displayErrorMsg(e); 
+        } catch (Exception e) {
+            calculatorView.displayErrorMsg(e);
         }
     }
     

@@ -23,7 +23,7 @@ public class FractionCalculatorApp {
      * @param args expression to evaluation contaning operation on fractions.
      * For example:
      * "1/2+3/4"
-     * <b>Note:</b>Running interactive mode if no arguments are passed. 
+     * <b>Note:</b>Running interactive mode if no arguments were passed. 
      */
     public static void main(String[] args) {
         SimpleFractionExpressionEvaluator evaluator = new SimpleFractionExpressionEvaluator();

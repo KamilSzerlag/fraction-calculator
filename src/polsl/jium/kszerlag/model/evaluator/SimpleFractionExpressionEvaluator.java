@@ -45,6 +45,7 @@ public class SimpleFractionExpressionEvaluator {
         char arithmeticOperator = 0;
         for (int i = 0; i < expression.length(); i++) {
             char symbol = expression.charAt(i);
+            checkSupportedSymbol(symbol);
             if (isNumber(symbol)) {
                 sb.append(symbol);
             }
@@ -52,17 +53,57 @@ public class SimpleFractionExpressionEvaluator {
                 sb.append(symbol);
             }
             if (isAritchmeticOperators(symbol)) {
-                Fraction fraction = Fraction.valueOf(sb.toString());
+                if (arithmeticOperator != 0) {
+                    throw new EvaluationExpressionException("Too many operators in expression!");
+                }
+                Fraction fraction = Fraction.of(sb.toString());
                 fractions.add(fraction);
                 sb = new StringBuilder();
                 arithmeticOperator = symbol;
             }
             if (i + 1 == expression.length()) {
-                Fraction fraction = Fraction.valueOf(sb.toString());
+                Fraction fraction = Fraction.of(sb.toString());
                 fractions.add(fraction);
             }
         }
         return doFractionArithmeticOperation(fractions, arithmeticOperator);
+    }
+    
+    /**
+     * Checking if symbol is supported by evaluator algorithm.
+     * 
+     * @param symbol input symbol.
+     * @throws EvaluationExpressionException if symbol is unsupported by algorithm.
+     */
+    private void checkSupportedSymbol(char symbol) throws EvaluationExpressionException {
+        if (!isNumber(symbol) && !isAritchmeticOperators(symbol) && symbol != FRACTION_SYMBOL) {
+            throw new EvaluationExpressionException("Unsupported symbol!");
+        }
+    }
+    
+    /**
+     * Determines wheather the symbol is a number.
+     * 
+     * @param symbol char symbol.
+     * @return true if symbol is a number.
+     */
+    private boolean isNumber(char symbol) {
+        return (symbol >= '0') && (symbol <= '9');
+    }
+    
+    /**
+     * Determines whether the symbol is supported arithmetic operator.
+     * 
+     * @param symbol - char contains arithmetic operator.
+     * @return true if operator is supported, else false.
+     */
+    private boolean isAritchmeticOperators(char symbol) {
+        for (char arithmeticOperator : ARITHMETIC_OPERATORS) {
+            if(symbol == arithmeticOperator) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -79,9 +120,6 @@ public class SimpleFractionExpressionEvaluator {
     private Fraction doFractionArithmeticOperation(List<Fraction> fractions, char operator) throws EvaluationExpressionException {
         if (fractions == null || fractions.isEmpty()) {
             return null;
-        }
-        if (!isAritchmeticOperators(operator)) {
-            throw new EvaluationExpressionException("No such arithmetic operation!");
         }
         
         Iterator<Fraction> iterator = fractions.iterator();
@@ -105,30 +143,5 @@ public class SimpleFractionExpressionEvaluator {
             return arithmeticOperation.divide(firstFraction, secondFraction);
         }
         return firstFraction;
-    }
-    
-    /**
-     * Determines whether the symbol is supported arithmetic operator.
-     * 
-     * @param symbol - char contains arithmetic operator.
-     * @return true if operator is supported, else false.
-     */
-    private boolean isAritchmeticOperators(char symbol) {
-        for (char arithmeticOperator : ARITHMETIC_OPERATORS) {
-            if(symbol == arithmeticOperator) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    /**
-     * Determines wheather the symbol is a number.
-     * 
-     * @param symbol char symbol.
-     * @return true if symbol is a number.
-     */
-    private boolean isNumber(char symbol) {
-        return (symbol >= '0') && (symbol <= '9');
     }
 }
