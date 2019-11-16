@@ -144,12 +144,19 @@ public class Fraction implements Calculable, Comparable<Fraction>{
         if (other == null) {
             throw new NullPointerException("Compared object is null!");
         }
+        if (this == other) {
+            return 0;
+        }
+        if (getClass() != other.getClass()) {
+            throw new IllegalArgumentValueException("Passed argument is not instance of Fraction");
+        }
         FractionUtil fractionUtil = new FractionUtil();
+        final Fraction thisCommonDenominator = fractionUtil.findCommonDenominator(this, other);
         final Fraction otherCommonDenominator = fractionUtil.findCommonDenominator(other, this);
-        if (this.getNumerator() < otherCommonDenominator.getNumerator()) {
+        if (thisCommonDenominator.getNumerator() < otherCommonDenominator.getNumerator()) {
             return -1;
         }
-        if (this.getNumerator() > otherCommonDenominator.getNumerator()) {
+        if (thisCommonDenominator.getNumerator() > otherCommonDenominator.getNumerator()) {
             return 1;
         }
         return 0;
