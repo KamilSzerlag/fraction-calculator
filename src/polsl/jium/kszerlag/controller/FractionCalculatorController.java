@@ -23,7 +23,7 @@ public class FractionCalculatorController {
      * <code>SimpleFractionExpressionEvaluator</code> and view represented by
      * class implementing <code>Displayable</code> interface.
      * 
-     * @param evaluator model containing logic to evaluating mathematics expression.
+     * @param evaluator model containing logic to evaluating mathematical expression.
      * @param calculatorView view implementing <code>Displayable</code> interface.
      */
     public FractionCalculatorController(SimpleFractionExpressionEvaluator evaluator, Displayable calculatorView) {
@@ -35,7 +35,7 @@ public class FractionCalculatorController {
      * Performing expression calculation, and displaying result value in 
      * calculator view text field.
      * 
-     * @param expression - <code>String</code> contains mathematics expression.
+     * @param expression - <code>String</code> contains mathematics expression containing fractions.
      */
     public void calculate(String expression) {
         try {

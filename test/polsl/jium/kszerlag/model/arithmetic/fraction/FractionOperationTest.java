@@ -5,7 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Unit tests for <code>FractionOperation</code> class.
+ * 
+ * @version 1.0
  * @author Kamil Szerląg
  */
 public class FractionOperationTest {
@@ -19,6 +21,8 @@ public class FractionOperationTest {
 
     /**
      * Test of add method, of class FractionOperation.
+     * 
+     * Testing if fractions addition operation is correct.
      */
     @Test
     public void should_Return_Correct_Addition_Value() {
@@ -26,20 +30,28 @@ public class FractionOperationTest {
         Fraction secondSummand = new Fraction(3, 4);
         Fraction expResult = new Fraction(10, 8);
         Fraction result = instance.add(firstSummand, secondSummand);
-        assertEquals(expResult, result);
+        assertEquals("Addition test failed. Incorrect result.",expResult, result);
     }
-
+    
+    /**
+     * Test of add method, of class FractionOperation.
+     * 
+     * Testing if result of fractions addition operation is inncorrect.
+     */
     @Test
     public void should_Return_Incorect_Addition_Value() {
         Fraction firstSummand = new Fraction(1, 2);
         Fraction secondSummand = new Fraction(3, 4);
         Fraction expResult = new Fraction(1, 2);
         Fraction result = instance.add(firstSummand, secondSummand);
-        assertNotEquals(expResult, result);
+        assertNotEquals("Addition test failed. Should return different value then expected.", expResult, result);
     }
     
     /**
-     * Test of subtruct method, of class FractionOperation.
+     * Test of add method, of class FractionOperation.
+     * 
+     * Testing if method add throws IllegalArgumentValueException, when 
+     * one of passed arguments is null.
      */
     @Test(expected = IllegalArgumentValueException.class)
     public void should_Throws_IllegalArgumentException_Caused_By_First_Arg() {
@@ -48,6 +60,12 @@ public class FractionOperationTest {
         instance.add(firstSummand, secondSummand);
     }
     
+    /**
+     * Test of add method, of class FractionOperation.
+     * 
+     * Testing if method add throws IllegalArgumentValueException, when
+     * one of passed arguments is null.
+     */
     @Test(expected = IllegalArgumentValueException.class)
     public void should_Throws_IllegalArgumentException_Caused_By_Second_Arg() {
         Fraction firstSummand = new Fraction(3, 4);
@@ -64,19 +82,26 @@ public class FractionOperationTest {
         Fraction secondFactor = new Fraction(1, 4);
         Fraction expResult = new Fraction(1, 8);
         Fraction result = instance.multiply(firstFactor, secondFactor);
-        assertEquals(expResult, result);
+        assertEquals("Multiplication test failed. Incorrect result.", expResult, result);
     }
 
+    /**
+     * Test of multiply method, of class FractionOperation.
+     * 
+     * Testing if result of mulitiplication is incorrect.
+     */
     @Test
     public void should_Return_Incorrect_Multiply_Value() {
         Fraction firstFactor = new Fraction(1, 4);
         Fraction secondFactor = new Fraction(1, 4);
         Fraction expResult = new Fraction(1, 8);
         Fraction result = instance.multiply(firstFactor, secondFactor);
-        assertNotEquals(expResult, result);
+        assertNotEquals("Multiplication test failed. Result should be different then expected value", expResult, result);
     }
     /**
      * Test of divide method, of class FractionOperation.
+     * 
+     * Testing if result of division is correct.
      */
     @Test
     public void should_Return_Correct_Divide_Value() {
@@ -84,7 +109,7 @@ public class FractionOperationTest {
         Fraction devisor = new Fraction(4, 3);
         Fraction expResult = new Fraction(3, 12);
         Fraction result = instance.divide(dividend, devisor);
-        assertEquals(expResult, result);
+        assertEquals("Division test failed. Incorrect result.", expResult, result);
     }
 
      /**
@@ -96,7 +121,7 @@ public class FractionOperationTest {
         Fraction devisor = new Fraction(4, 3);
         Fraction expResult = new Fraction(3, 12);
         Fraction result = instance.divide(dividend, devisor);
-        assertNotEquals(expResult, result);
+        assertNotEquals("Division test failed. Result should be different then expected.", expResult, result);
     }
     
     /**
@@ -108,7 +133,7 @@ public class FractionOperationTest {
         int exponent = 2;
         Fraction expResult = new Fraction(1, 4);
         Fraction result = instance.power(base, exponent);
-        assertEquals(expResult, result);
+        assertEquals("Power test fialed. Incorrect result.", expResult, result);
     }
     
 }
