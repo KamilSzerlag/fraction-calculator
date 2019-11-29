@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 /**
  * Unit tests for <code>Fraction</code> class.
  * 
- * @version 1.0
+ * @version 2.0
  * @author Kamil Szerląg
  */
 public class FractionTest {
@@ -19,15 +19,16 @@ public class FractionTest {
     /**
      * Test of of method, of class Fraction.
      * 
-     * Testing if method throws IllegalArgumentValueException, when denominator 
+     * Testing if method throws FractionArithmeticException, when denominator 
      * is zero.
      */
     @Test
     public void should_Throws_IllegalArgumentValueException_When_Denominator_Is_Zero() {
         expectedException.expect(FractionArithmeticException.class);
         expectedException.expectMessage("Denominator must not be 0!");
-        String fraction = "4/0";
-        Fraction.of(fraction);
+        String fractionString = "4/0";
+        Fraction fraction = new Fraction();
+        fraction.parseFraction(fractionString);
     }
     
     /**
@@ -37,9 +38,10 @@ public class FractionTest {
      */
     @Test
     public void should_Return_Correct_Fraction_Obcject_With_Value_Of_String() {
-        String fraction = "4/3";
+        String fractionString = "4/3";
         Fraction expResult = new Fraction(4, 3);
-        Fraction result = Fraction.of(fraction);
+        Fraction fraction = new Fraction();
+        Fraction result = fraction.parseFraction(fractionString);
         assertEquals(assertionFailedMsg("Return incorrect fraction object, object should be correct.", expResult, result),expResult, result);
     }
     
@@ -50,9 +52,10 @@ public class FractionTest {
      */
     @Test
     public void should_Return_Incorrect_Fraction_Obcject_With_Value_Of_String() {
-        String fraction = "4/3";
+        String fractionString = "4/3";
         Fraction expResult = new Fraction(3, 4);
-        Fraction result = Fraction.of(fraction);
+        Fraction fraction = new Fraction();
+        Fraction result = fraction.parseFraction(fractionString);
         assertNotEquals(assertionFailedMsg("Return correct fraction object, object should be incorrect", expResult, result), expResult, result);
     }
 
@@ -62,46 +65,37 @@ public class FractionTest {
      * Checking if method of throwing expected NullPointerException when null
      * is passed as argument.
      */
-    @Test(expected = NullPointerException.class)
-    public void should_Throws_NullPointerException_Caused_By_Null_Arg() {
-        String fraction = null;
-        Fraction.of(fraction);
+    @Test(expected = ArithmeticException.class)
+    public void should_Throws_ArithmeticException_Caused_By_Null_Arg() {
+        String fractionString = null;
+        Fraction fraction = new Fraction();
+        fraction.parseFraction(fractionString);
     }
     
     /**
-     * Test of of method, of class Fraction.
-     * 
-     * Checking whether method of throwing expected NullPointerException empty
-     * string is passed as argument.
-     */
-    @Test(expected = NullPointerException.class)
-    public void should_Throws_NullPointerException_Caused_By_Empty_String_Arg() {
-        String fraction = "";
-        Fraction.of(fraction);
-    }
-    
-    /**
-     * Test of of method, of class Fraction.
+     * Test of parseFraction method, of class Fraction.
      * 
      * Checking whether method of throwing expected NumberFormatException, when
      * String contiains unexpected chars.
      */
-    @Test(expected = NumberFormatException.class)
+    @Test(expected = FractionArithmeticException.class)
     public void should_Throws_NumberFormatException() {
-        String fraction = "1-5";
-        Fraction.of(fraction);
+        String fractionString = "1-5";
+        Fraction fraction = new Fraction();
+        fraction.parseFraction(fractionString);
     }
     
     /**
-     * Test of of method, of class Fraction.
+     * Test of parseFraction method, of class Fraction.
      * 
      * Checking whether method of throwing expected InvalidFractionFormatException, when
      * String contains unsupported format of fraction.
      */
-    @Test(expected = InvalidFractionFormatException.class)
-    public void should_Throws_InvalidFormatException() {
-        String fraction = "1/2/4";
-        Fraction.of(fraction);
+    @Test(expected = FractionArithmeticException.class)
+    public void should_Throws_FractionArithmeticException() {
+        String fractionString = "1/2/4";
+        Fraction fraction = new Fraction();
+        fraction.parseFraction(fractionString);
     }
     
     /**

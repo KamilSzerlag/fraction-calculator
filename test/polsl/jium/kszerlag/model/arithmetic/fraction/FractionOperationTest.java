@@ -48,32 +48,6 @@ public class FractionOperationTest {
     }
     
     /**
-     * Test of add method, of class FractionOperation.
-     * 
-     * Testing if method add throws IllegalArgumentValueException, when 
-     * one of passed arguments is null.
-     */
-    @Test(expected = IllegalArgumentValueException.class)
-    public void should_Throws_IllegalArgumentException_Caused_By_First_Arg() {
-        Fraction firstSummand = null;
-        Fraction secondSummand = new Fraction(3, 4);
-        instance.add(firstSummand, secondSummand);
-    }
-    
-    /**
-     * Test of add method, of class FractionOperation.
-     * 
-     * Testing if method add throws IllegalArgumentValueException, when
-     * one of passed arguments is null.
-     */
-    @Test(expected = IllegalArgumentValueException.class)
-    public void should_Throws_IllegalArgumentException_Caused_By_Second_Arg() {
-        Fraction firstSummand = new Fraction(3, 4);
-        Fraction secondSummand = null;
-        instance.add(firstSummand, secondSummand);
-    }
-
-    /**
      * Test of multiply method, of class FractionOperation.
      */
     @Test

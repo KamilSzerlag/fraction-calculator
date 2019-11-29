@@ -9,9 +9,11 @@ package polsl.jium.kszerlag.model.arithmetic.fraction;
  */
 public class FractionArithmeticException extends ArithmeticException {
 
-    public FractionArithmeticException() {
-    }
-
+    /**
+     * Constructor provides message 
+     * 
+     * @param s excepition message. 
+     */
     public FractionArithmeticException(String s) {
         super(s);
     }

@@ -56,13 +56,15 @@ public class SimpleFractionExpressionEvaluator {
                 if (arithmeticOperator != 0) {
                     throw new EvaluationExpressionException("Too many operators in expression!");
                 }
-                Fraction fraction = Fraction.of(sb.toString());
+                Fraction fraction = new Fraction();
+                fraction = new Fraction().parseFraction(sb.toString());
                 fractions.add(fraction);
                 sb = new StringBuilder();
                 arithmeticOperator = symbol;
             }
             if (i + 1 == expression.length()) {
-                Fraction fraction = Fraction.of(sb.toString());
+                Fraction fraction = new Fraction();
+                fraction = fraction.parseFraction(sb.toString());
                 fractions.add(fraction);
             }
         }

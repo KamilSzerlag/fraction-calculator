@@ -1,9 +1,6 @@
 package polsl.jium.kszerlag;
 
-import polsl.jium.kszerlag.controller.FractionCalculatorController;
-import polsl.jium.kszerlag.model.evaluator.SimpleFractionExpressionEvaluator;
-import polsl.jium.kszerlag.view.console.ConsolePrinter;
-import polsl.jium.kszerlag.view.window.CalculatorView;
+import polsl.jium.kszerlag.server.FractionServer;
 
 /**
  * FractionCalculatorApp helps performing operations on mathematics fraction.
@@ -20,22 +17,11 @@ import polsl.jium.kszerlag.view.window.CalculatorView;
 public class FractionCalculatorApp {
 
     /**
-     * @param args expression to evaluation contaning operation on fractions.
-     * For example:
-     * "1/2+3/4"
-     * <b>Note:</b>Running interactive mode if no arguments were passed. 
+     * @param args  
      */
     public static void main(String[] args) {
-        SimpleFractionExpressionEvaluator evaluator = new SimpleFractionExpressionEvaluator();
-        if (args.length == 1) {
-            ConsolePrinter consolePrinter = new ConsolePrinter();
-            FractionCalculatorController controller = new FractionCalculatorController(evaluator, consolePrinter);
-            controller.calculate(args[0]);
-        } else {
-            CalculatorView calculatorView = new CalculatorView();
-            FractionCalculatorController controller = new FractionCalculatorController(evaluator, calculatorView);
-            calculatorView.setController(controller);
-        }
+        FractionServer server = new FractionServer();
+        server.createServerSocket();
     }
     
 }

@@ -8,7 +8,7 @@ import polsl.jium.kszerlag.model.arithmetic.Calculable;
  * In maths fraction represents a part of a whole or, more generally, any 
  * number of equal parts
  * 
- * @version 2.0
+ * @version 3.0
  * @author Kamil Szerląg
  */
 public class Fraction implements Calculable, Comparable<Fraction>{
@@ -29,6 +29,12 @@ public class Fraction implements Calculable, Comparable<Fraction>{
      * where 2 is integer part of fraction.
      */
     private int fractionInteger;
+
+    /**
+     * Default Fraction object constructor.
+     */
+    public Fraction() {
+    }
     
     /**
      * Constructing Fraction object from passed numerator and denominator values.
@@ -72,9 +78,9 @@ public class Fraction implements Calculable, Comparable<Fraction>{
      * @throws NullPointerException
      * @return Fraction object from <code>String</code> passed value.
      */
-    public static Fraction of(String fraction) throws InvalidFractionFormatException, NullPointerException {
+    public Fraction parseFraction(String fraction) throws FractionArithmeticException {
         if (fraction == null || fraction.isEmpty()) {
-            throw new NullPointerException("String argument is null!");
+            return null;
         }
         fraction = fraction.trim();
         String[] splited = fraction.split("/");
@@ -83,21 +89,36 @@ public class Fraction implements Calculable, Comparable<Fraction>{
             return new Fraction(numerator, 1);
         }
         if (splited.length != 2) {
-            throw new InvalidFractionFormatException("Invalid fraction format! Fraction should be in 'X/Y' format");
+            throw new FractionArithmeticException("Invalid fraction format! Fraction should be in 'X/Y' format");
         } 
         int numerator = Integer.valueOf(splited[0]);
         int denominator = Integer.valueOf(splited[1]);
         return new Fraction(numerator, denominator);
     }
     
+    /**
+     * Provides access to fraction numerator value.
+     * 
+     * @return numerator field value.
+     */
     public int getNumerator() {
         return numerator;
     }
-
+    
+    /**
+     * Provides access to fraction denominator value.
+     * 
+     * @return denominator field value. 
+     */
     public int getDenominator() {
         return denominator;
     }
 
+    /**
+     * Provides acces to fraction integer value.
+     *
+     * @return integer field value.
+     */
     public int getFractionInteger() {
         return fractionInteger;
     }
@@ -107,7 +128,7 @@ public class Fraction implements Calculable, Comparable<Fraction>{
         if (this.numerator == 0) {
             return "0";
         }
-        return this.numerator + "\n-\n" + this.denominator;
+        return this.numerator + "/" + this.denominator;
     }
 
     @Override
@@ -142,13 +163,13 @@ public class Fraction implements Calculable, Comparable<Fraction>{
     @Override
     public int compareTo(Fraction other) {
         if (other == null) {
-            throw new NullPointerException("Compared object is null!");
+            throw new FractionArithmeticException("Compared object is null!");
         }
         if (this == other) {
             return 0;
         }
         if (getClass() != other.getClass()) {
-            throw new IllegalArgumentValueException("Passed argument is not instance of Fraction");
+            throw new FractionArithmeticException("Passed argument is not instance of Fraction");
         }
         FractionUtil fractionUtil = new FractionUtil();
         final Fraction thisCommonDenominator = fractionUtil.findCommonDenominator(this, other);

@@ -15,10 +15,10 @@ class FractionUtil {
      * @param args - all classes that inherit from Object class.
      * @throws IllegalArgumentException 
      */
-    void validateElementsNotNull(Object... args) throws IllegalArgumentValueException {
+    void validateElementsNotNull(Object... args) throws FractionArithmeticException {
         for (Object obj : args) {
             if (obj == null) {
-                throw new IllegalArgumentValueException("Object must not be null!");
+                throw new FractionArithmeticException("Object must not be null!");
             }
         }
     }

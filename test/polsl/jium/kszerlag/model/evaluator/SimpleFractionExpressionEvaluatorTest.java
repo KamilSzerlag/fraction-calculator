@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import polsl.jium.kszerlag.model.arithmetic.fraction.Fraction;
-import polsl.jium.kszerlag.model.arithmetic.fraction.InvalidFractionFormatException;
 
 /**
  * Unit tests for <code>SimpleFractionExpressionEvaluator</code> class.
@@ -113,7 +112,7 @@ public class SimpleFractionExpressionEvaluatorTest {
      * 
      * @throws EvaluationExpressionException unsupported fraction format.
      */
-    @Test(expected = InvalidFractionFormatException.class)
+    @Test(expected = EvaluationExpressionException.class)
     public void should_Throws_Evaluation_Expression_Exception_Caused_By_Invalid_Fraction_Format() throws EvaluationExpressionException {
         String expression = "1/3/3/4";
         instance.eval(expression);
