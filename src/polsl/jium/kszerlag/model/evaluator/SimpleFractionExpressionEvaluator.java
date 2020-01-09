@@ -11,7 +11,7 @@ import polsl.jium.kszerlag.model.arithmetic.fraction.FractionOperation;
  * Class provides methods for evaluating basic mathematics expression which 
  * contains arithmetic operations on fraction like "2/3 + 1/2" or "1/2 + 1/2" 
  * 
- * @version 2.0
+ * @version 3.0
  * @author Kamil Szerląg
  */
 public class SimpleFractionExpressionEvaluator {
@@ -31,7 +31,7 @@ public class SimpleFractionExpressionEvaluator {
     /**
      * Evaluating mathematics expression like "2/1 + 7/5".
      * 
-     * @param expression - contains mathematic expression in <code>Sting</code>.
+     * @param expression contains mathematical expression in <code>String</code>.
      * @return result of expression as <code>Fraction</code> object.
      * @throws EvaluationExpressionException when expression contains unsupported expression.
      */
@@ -57,7 +57,7 @@ public class SimpleFractionExpressionEvaluator {
                     throw new EvaluationExpressionException("Too many operators in expression!");
                 }
                 Fraction fraction = new Fraction();
-                fraction = new Fraction().parseFraction(sb.toString());
+                fraction = fraction.parseFraction(sb.toString());
                 fractions.add(fraction);
                 sb = new StringBuilder();
                 arithmeticOperator = symbol;
@@ -74,7 +74,6 @@ public class SimpleFractionExpressionEvaluator {
     /**
      * Checking if symbol is supported by evaluator algorithm.
      * 
-     * @param symbol input symbol.
      * @throws EvaluationExpressionException if symbol is unsupported by algorithm.
      */
     private void checkSupportedSymbol(char symbol) throws EvaluationExpressionException {
@@ -86,7 +85,6 @@ public class SimpleFractionExpressionEvaluator {
     /**
      * Determines wheather the symbol is a number.
      * 
-     * @param symbol char symbol.
      * @return true if symbol is a number.
      */
     private boolean isNumber(char symbol) {
@@ -96,7 +94,7 @@ public class SimpleFractionExpressionEvaluator {
     /**
      * Determines whether the symbol is supported arithmetic operator.
      * 
-     * @param symbol - char contains arithmetic operator.
+     * @param symbol char contains arithmetic operator.
      * @return true if operator is supported, else false.
      */
     private boolean isAritchmeticOperators(char symbol) {

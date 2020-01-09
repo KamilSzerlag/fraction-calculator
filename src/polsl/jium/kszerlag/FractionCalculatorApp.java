@@ -1,26 +1,23 @@
 package polsl.jium.kszerlag;
 
-import polsl.jium.kszerlag.server.FractionServer;
+import polsl.jium.kszerlag.server.AppServer;
 
 /**
- * FractionCalculatorApp helps performing operations on mathematics fraction.
- * Input expression for example like "2/1+3/5" will be calculated 
- * and displayed in calculator window text field.
- * 
- * Actually basic arithmetic operations are supported.
- * 
- * Application using MVC patter for communications between logic and visual layer. 
+ * Class contains main method for server side fraction calculator application.
  *
- * @author Kamil Szeląg
+ * @author Kamil Szerląg
  * @version 1.0
  */
 public class FractionCalculatorApp {
 
     /**
-     * @param args  
+     * Main method which starting server.
+     * The server is created immediately after starting the application.
+     * 
+     * @param args no arguments are needed. 
      */
     public static void main(String[] args) {
-        FractionServer server = new FractionServer();
+        AppServer server = new AppServer();
         server.createServerSocket();
     }
     

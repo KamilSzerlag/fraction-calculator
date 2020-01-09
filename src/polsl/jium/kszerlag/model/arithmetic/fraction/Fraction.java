@@ -39,8 +39,8 @@ public class Fraction implements Calculable, Comparable<Fraction>{
     /**
      * Constructing Fraction object from passed numerator and denominator values.
      * 
-     * @param numerator integer value.
-     * @param denominator integer value, must be different then zero.
+     * @param numerator could be zero.
+     * @param denominator must be different then zero.
      * @throws FractionArithmeticException - is thrown when passed denominator value is zero.
      */
     public Fraction(int numerator, int denominator) throws FractionArithmeticException {
@@ -54,9 +54,9 @@ public class Fraction implements Calculable, Comparable<Fraction>{
     /**
      * Constructing Fraction object with optional fraction integer part.
      * 
-     * @param numerator integer value.
-     * @param denominator integer value, must be different then zero.
-     * @param fractionInteger integer value.
+     * @param numerator could be zero.
+     * @param denominator must be different then zero.
+     * @param fractionInteger could be zero.
      */
     public Fraction(int numerator, int denominator, int fractionInteger) {
         this(numerator, denominator);
@@ -74,13 +74,13 @@ public class Fraction implements Calculable, Comparable<Fraction>{
      * <b>Note:</b> Actually integer part of of fraction is unsupported.
      * @version 1.0
      * @param fraction <code>String</code> contains fraction in "X/B" format.
-     * @throws InvalidFractionFormatException when <code>String</code> format is unsupported.
-     * @throws NullPointerException
      * @return Fraction object from <code>String</code> passed value.
+     * @throws FractionArithmeticException when creating properly Fraction object is
+     * impossible
      */
     public Fraction parseFraction(String fraction) throws FractionArithmeticException {
         if (fraction == null || fraction.isEmpty()) {
-            return null;
+            throw new FractionArithmeticException("String can't be null or empty");
         }
         fraction = fraction.trim();
         String[] splited = fraction.split("/");
@@ -117,12 +117,17 @@ public class Fraction implements Calculable, Comparable<Fraction>{
     /**
      * Provides acces to fraction integer value.
      *
-     * @return integer field value.
+     * @return fraction integer field value.
      */
     public int getFractionInteger() {
         return fractionInteger;
     }
 
+    /**
+     * Creating required format of Fraction representation.
+     * 
+     * @return required format of fraction representation in <code>String</code>
+     */
     @Override
     public String toString() {
         if (this.numerator == 0) {
@@ -131,11 +136,21 @@ public class Fraction implements Calculable, Comparable<Fraction>{
         return this.numerator + "/" + this.denominator;
     }
 
+    /**
+     * hashCode code implementation based on Objects.hash() method.
+     * 
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.numerator, this.denominator);
     }
 
+    /**
+     * Compering equality between to Fraction objects.
+     * 
+     * @param obj object to comparison.
+     * @return true if compared objects are equal, otherwise false.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -160,6 +175,13 @@ public class Fraction implements Calculable, Comparable<Fraction>{
         return true;
     }
 
+    /**
+     * Comparing two fraciton objects. 
+     * 
+     * @param other fraction to comparison.
+     * @return -1 if this fraction is lower then compared. 0 if this fraction is
+     * equals to compared. 1 if this fraction is greater then compared.
+     */
     @Override
     public int compareTo(Fraction other) {
         if (other == null) {
@@ -189,7 +211,7 @@ public class Fraction implements Calculable, Comparable<Fraction>{
      *   Fraction object with numerator value 1 and denomitator value 2 (1/2)
      *   gives 0.5.
      * 
-     * @return <code>double</code> value of fraction
+     * @return result of division numerator and denominator as double value. 
      */
     public double doubleValue() { 
         return (double) this.numerator / this.denominator;

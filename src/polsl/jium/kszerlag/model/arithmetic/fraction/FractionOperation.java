@@ -5,13 +5,19 @@ import polsl.jium.kszerlag.model.arithmetic.ArithmeticOperation;
 /**
  * Provides implementation for basic arithmetic operation on Fraction
  * 
- * @version 2.0
+ * @version 3.0
  * @author Kamil Szerląg
  */
 public class FractionOperation implements ArithmeticOperation<Fraction> {
     
+    /**
+     * Provides methods for basic operation on fraction.
+     */
     private final FractionUtil fractionUtil;
 
+    /**
+     * Constructiong fraction operation and performing fractionUtil field initialization.
+     */
     public FractionOperation() {
         this.fractionUtil = new FractionUtil();
     }

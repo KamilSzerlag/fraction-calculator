@@ -8,7 +8,7 @@ import polsl.jium.kszerlag.model.arithmetic.fraction.Fraction;
 /**
  * Unit tests for <code>SimpleFractionExpressionEvaluator</code> class.
  * 
- * @version 1.0
+ * @version 2.0
  * @author Kamil Szerląg
  */
 public class SimpleFractionExpressionEvaluatorTest {
@@ -103,18 +103,6 @@ public class SimpleFractionExpressionEvaluatorTest {
     @Test(expected = EvaluationExpressionException.class)
     public void should_Throws_Evaluation_Expression_Exception_Caused_By_Too_Many_Operators_In_Expression() throws EvaluationExpressionException {
         String expression = "1/2+1/3+4/3";
-        instance.eval(expression);
-    }
-    
-    /**
-     * Test of eval method.
-     * Only format with single line is supported.  
-     * 
-     * @throws EvaluationExpressionException unsupported fraction format.
-     */
-    @Test(expected = EvaluationExpressionException.class)
-    public void should_Throws_Evaluation_Expression_Exception_Caused_By_Invalid_Fraction_Format() throws EvaluationExpressionException {
-        String expression = "1/3/3/4";
         instance.eval(expression);
     }
     

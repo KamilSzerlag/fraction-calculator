@@ -23,7 +23,7 @@ public class FractionTest {
      * is zero.
      */
     @Test
-    public void should_Throws_IllegalArgumentValueException_When_Denominator_Is_Zero() {
+    public void should_Throws_FractionArithmeticException_When_Denominator_Is_Zero() {
         expectedException.expect(FractionArithmeticException.class);
         expectedException.expectMessage("Denominator must not be 0!");
         String fractionString = "4/0";
@@ -65,25 +65,14 @@ public class FractionTest {
      * Checking if method of throwing expected NullPointerException when null
      * is passed as argument.
      */
-    @Test(expected = ArithmeticException.class)
+    @Test(expected = FractionArithmeticException.class)
     public void should_Throws_ArithmeticException_Caused_By_Null_Arg() {
         String fractionString = null;
         Fraction fraction = new Fraction();
         fraction.parseFraction(fractionString);
+        fail("Should thrown FractionArithmeticException caused by null value.");
     }
     
-    /**
-     * Test of parseFraction method, of class Fraction.
-     * 
-     * Checking whether method of throwing expected NumberFormatException, when
-     * String contiains unexpected chars.
-     */
-    @Test(expected = FractionArithmeticException.class)
-    public void should_Throws_NumberFormatException() {
-        String fractionString = "1-5";
-        Fraction fraction = new Fraction();
-        fraction.parseFraction(fractionString);
-    }
     
     /**
      * Test of parseFraction method, of class Fraction.
@@ -92,7 +81,7 @@ public class FractionTest {
      * String contains unsupported format of fraction.
      */
     @Test(expected = FractionArithmeticException.class)
-    public void should_Throws_FractionArithmeticException() {
+    public void should_Throws_FractionArithmeticException_Caused_By_Too_Much_Division_Operators() {
         String fractionString = "1/2/4";
         Fraction fraction = new Fraction();
         fraction.parseFraction(fractionString);
@@ -107,7 +96,7 @@ public class FractionTest {
     @Test
     public void should_Return_Correct_String_Format() {
         Fraction instance = new Fraction(1, 2);
-        String expResult = "1\n-\n2";
+        String expResult = "1/2";
         String result = instance.toString();
         assertEquals("toString method failed. Returned Fraction String format is incorrect.", expResult, result);
     }
@@ -161,8 +150,8 @@ public class FractionTest {
         assertEquals("compareTo method test failed. Method returns that" + sample.toString() + "is not equal then" + equals.toString(), sample.compareTo(equals), 0);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void should_Throws_NullPointerException_When_Null_Is_Passed() {
+    @Test(expected = FractionArithmeticException.class)
+    public void should_Throws_FractionArithmeticException_When_Null_Is_Passed() {
         Fraction instance = new Fraction(1, 2);
         instance.compareTo(null);
     }

@@ -4,7 +4,7 @@ package polsl.jium.kszerlag.model.arithmetic.fraction;
  * Provides most useful method
  * for operating on fraction
  * 
- * @version 2.0
+ * @version 3.0
  * @author Kamil Szerląg
  */
 class FractionUtil {
@@ -13,12 +13,12 @@ class FractionUtil {
      * Validating passed arguments.
      * 
      * @param args - all classes that inherit from Object class.
-     * @throws IllegalArgumentException 
+     * @throws FractionArithmeticException when operation can't be performed due to null value
      */
     void validateElementsNotNull(Object... args) throws FractionArithmeticException {
         for (Object obj : args) {
             if (obj == null) {
-                throw new FractionArithmeticException("Object must not be null!");
+                throw new FractionArithmeticException("Arguments must not be null! Operation can't return valid value");
             }
         }
     }
@@ -34,7 +34,7 @@ class FractionUtil {
      * </p>
      * @param first - first Fraction object
      * @param second - second Fraction object
-     * @return the first fraction reduced to the common with second fraction <br>   
+     * @return the first fraction reduced to the common with second fraction   
      */
     Fraction findCommonDenominator(Fraction first, Fraction second) {
         if (first.getDenominator() == second.getDenominator()) {
@@ -52,7 +52,7 @@ class FractionUtil {
      *     fraction: 2/3<br>
      *     returns: 3/2<br>
      * </p>
-     * @param fraction - the Fraction object
+     * @param fraction Object representing fraction to revert.
      * @return reverted fraction
      */
     Fraction revertFraction(Fraction fraction) {
@@ -70,7 +70,7 @@ class FractionUtil {
      *      1st fraction: given 2/4 returning 1/2 which is irreducible
      *      2nd fraction: given 5/6 returning 5/6 becouse is irreducible
      * 
-     * @param fraction
+     * @param fraction which should be reduce.
      * @return irreducible fraction
      */
     Fraction irreducibleFraction(Fraction fraction) {
@@ -83,8 +83,6 @@ class FractionUtil {
      * which are not all zero, is the largest positive integer that divides each 
      * of the integers. For example, the gcd of 8 and 12 is 4.
      * 
-     * @param firstNumber - integer value of first number
-     * @param secondNumber - integer value of second number
      * @return greatest common divisor;
      */
     int findGreatestCommonDivisor(int firstNumber, int secondNumber) {
